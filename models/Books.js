@@ -1,18 +1,19 @@
 const db = require("../utils/database");
 
 module.exports = class Product {
-  constructor(id, title, description) {
+  constructor(id, title, description, isAvailable) {
     this.id = id;
     this.title = title;
     this.description = description;
+    this.isAvailable = isAvailable;
   }
   static getAllEmployee() {
     return db.execute("SELECT * from products");
   }
   save() {
     return db.execute(
-      "INSERT INTO products (title, description) VALUES (?, ?)",
-      [this.title, this.description]
+      "INSERT INTO products (title, description, isAvailable) VALUES (?, ?,?)",
+      [this.title, this.description, this.isAvailable]
     );
   }
   static findById(id) {
