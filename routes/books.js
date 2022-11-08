@@ -9,6 +9,6 @@ router.post("/", validateBookString, bookController.postData);
 
 router.delete("/:id", bookController.deleteData);
 
-router.put("/:id", validateBookString, bookController.updateData);
+router.put("/:id", bookController.updateData);
 
 module.exports = router;

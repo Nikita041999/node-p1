@@ -25,5 +25,6 @@ module.exports = class Product {
 
   static updateById(id, fieldsToUpdate) {
     db.query("UPDATE products SET ? WHERE id = '" + id + "'", fieldsToUpdate);
+    return db.execute("SELECT * FROM products WHERE products.id = ?", [id]);
   }
 };

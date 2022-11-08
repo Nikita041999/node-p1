@@ -18,18 +18,18 @@ exports.postData = async (req, res) => {
     const book = new Book(null, title, description, isAvailable);
     await book.save();
   }
-  res.status(200).json({});
-  // .redirect("/");
+  res.status(200).json({ data: req.body });
 };
 
 exports.deleteData = (req, res) => {
   Book.deletById(req.params.id)
-    .then((data) => res.json(data))
+    .then((data) => {
+      res.status(202).json(data);
+    })
     .catch((e) => res.json({ message: e }));
 };
 
-exports.updateData = (req, res) => {
-  Book.updateById(req.params.id, req.body)
-    .then((data) => res.json(data))
-    .catch((e) => res.json({ message: e }));
+exports.updateData = async (req, res) => {
+  const data = await Book.updateById(req.params.id, req.body);
+  res.json(data[0]);
 };
