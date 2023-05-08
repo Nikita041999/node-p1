@@ -1,9 +1,8 @@
 const Book = require("../models/Books");
-// const { check, validationResult } = require("express-validator");
 
 exports.getAllData = (req, res) => {
   Book.getAllEmployee()
-    .then((data) => res.json(data[0]))
+    .then((data) => res.json({ data: data[0] }))
     .catch((e) => res.json({ message: e }));
 };
 
@@ -31,5 +30,5 @@ exports.deleteData = (req, res) => {
 
 exports.updateData = async (req, res) => {
   const data = await Book.updateById(req.params.id, req.body);
-  res.json(data[0]);
+  res.json(data);
 };

@@ -8,23 +8,48 @@ module.exports = class Product {
     this.isAvailable = isAvailable;
   }
   static getAllEmployee() {
-    return db.execute("SELECT * from products");
+    return db.execute("call node_p1.SongList()");
   }
   save() {
     return db.execute(
-      "INSERT INTO products (title, description, isAvailable) VALUES (?, ?,?)",
-      [this.title, this.description, this.isAvailable]
+      "call node_p1.InsertSong(?,?,?)",
+      [this.title, this.description, this.isAvailable],
+      function (err, result) {
+        if (err) {
+          console.log("err:", err);
+        } else {
+          console.log("results:", result);
+        }
+      }
     );
   }
   static findById(id) {
-    return db.execute("SELECT * FROM products WHERE products.id = ?", [id]);
+    // return db.execute("SELECT * FROM products WHERE products.id = ?", [id]);
+    return db.execute("call node_p1.findSongById(?)", [id]);
   }
   static deletById(id) {
-    return db.execute("DELETE FROM products WHERE products.id = ?", [id]);
+    return db.execute("call node_p1.DeleteSong", [id]);
   }
 
   static updateById(id, fieldsToUpdate) {
-    db.query("UPDATE products SET ? WHERE id = '" + id + "'", fieldsToUpdate);
-    return db.execute("SELECT * FROM products WHERE products.id = ?", [id]);
+    const { title, description, isAvailable } = fieldsToUpdate;
+    const fieldToUpdate = Object.keys(fieldsToUpdate)[0];
+    if (title) {
+      db.execute("call node_p1.updateSong(?,?,?)", [id, fieldToUpdate, title]);
+    } else if (description) {
+      db.execute("call node_p1.updateSong(?,?,?)", [
+        id,
+        fieldToUpdate,
+        description,
+      ]);
+    } else if (isAvailable) {
+      db.execute("call node_p1.updateSong(?,?,?)", [
+        id,
+        fieldToUpdate,
+        isAvailable.toString(),
+      ]);
+    }
+    // db.query("UPDATE products SET ? WHERE id = '" + id + "'", fieldsToUpdate);
+    // return db.execute("SELECT * FROM products WHERE products.id = ?", [id]);
   }
 };

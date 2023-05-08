@@ -27,7 +27,8 @@ exports.validateBookString = async (req, res, next) => {
       isValid = false;
       message = "Number and type of items should be same.";
     }
-  } else if (typeof title !== "string") {
+  } 
+  else if (typeof title !== "string") {
     isValid = false;
     message = "Title is not in String format";
   } else if (typeof description !== "string") {
@@ -65,3 +66,36 @@ exports.validateBookString = async (req, res, next) => {
   }
   next();
 };
+
+
+
+// if (description.length !== len || isavailable.length !== len) {
+//   isValid = false;
+//   message = "Number and type of items should be same.";
+// }
+// } else if (typeof title !== "string") {
+// isValid = false;
+// message = "Title is not in String format";
+// } else if (typeof description !== "string") {
+// isValid = false;
+// message = "Description is not in String format";
+// } else if (!title.length || !description.length) {
+// isValid = false;
+// message = "Fields cannot be empty";
+// } else if (!isAvType.includes(typeof isavailable)) {
+// isValid = false;
+// message = "isavailable1 Should be either 1/0/yes/no/ture/false";
+// } else if (typeof isavailable === "number") {
+// if (isavailable != 1 && isavailable != 0) {
+//   isValid = false;
+//   message = "isavailable2 Should be either 1/0/yes/no/ture/false";
+// }
+// } else if (typeof isavailable === "string") {
+// if (
+//   isavailable.toLowerCase() !== "yes" &&
+//   isavailable.toLowerCase() !== "no"
+// ) {
+//   isValid = false;
+//   message = "isavailable3 Should be either 1/0/yes/no/ture/false";
+// }
+// }
