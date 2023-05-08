@@ -3,3 +3,4 @@ node_modules
 procs
 tests
 abc
+.env
