@@ -27,8 +27,7 @@ exports.validateBookString = async (req, res, next) => {
       isValid = false;
       message = "Number and type of items should be same.";
     }
-  } 
-  else if (typeof title !== "string") {
+  } else if (typeof title !== "string") {
     isValid = false;
     message = "Title is not in String format";
   } else if (typeof description !== "string") {
@@ -66,8 +65,6 @@ exports.validateBookString = async (req, res, next) => {
   }
   next();
 };
-
-
 
 // if (description.length !== len || isavailable.length !== len) {
 //   isValid = false;
